@@ -8,6 +8,7 @@
         "facecolor",
         "figsize",
         "fontweight",
+        "infty",
         "meshgrid",
         "nashpy",
         "streamplot",
