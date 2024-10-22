@@ -42,6 +42,8 @@
         "softmax",
         "streamplot",
         "Subclassing",
+        "testcase",
+        "Testcases",
         "tfds",
         "Timepoints",
         "Traceback",

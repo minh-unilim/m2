@@ -4,8 +4,14 @@ function X = tensor_from_matrix(A, mode, dims)
     
     % Reshape the matrix back into the permuted dimensions
     reshaped_dims = [dims(mode), dims(perm(2:end))];
-    X = reshape(A, reshaped_dims);
+    reshaped_array = reshape(A, reshaped_dims);
     
     % Inverse permute the dimensions to get back to the original order
-    X = ipermute(X, perm);
+    reshaped_array = ipermute(reshaped_array, perm);
+    
+    % Flatten the array
+    flattened_array = reshaped_array(:);
+    
+    % Create an instance of the Tensor class and return it
+    X = Tensor(flattened_array', dims);
 end

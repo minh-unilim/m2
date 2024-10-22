@@ -5,9 +5,15 @@ function [core, factors] = hooi(X, ranks, max_iter, tol)
         max_iter = 10;
         tol = 1e-3;
     end
-    
+
     nmodes = length(size(X));
     [core, factors] = hosvd(X, ranks);
+
+    if nargin == 1
+        fprintf("Multilinear ranks not specified, computing HOSVD...\n")
+        [core, factors] = hosvd(X, ranks);
+        return
+    end
 
     for iter = 1:max_iter
         for mode = 1:nmodes 
@@ -28,6 +34,7 @@ function [core, factors] = hooi(X, ranks, max_iter, tol)
         end
         
         core = X;
+
         for inner_mode = 1:nmodes
             core = tensor_matrix_product(core, factors{inner_mode}', inner_mode);
         end
@@ -38,6 +45,7 @@ function [core, factors] = hooi(X, ranks, max_iter, tol)
         X_approx = core;
 
         for inner_mode = 1:nmodes
+            disp(X_approx)
             X_approx = tensor_matrix_product(X_approx, factors{inner_mode}, inner_mode);
         end    
 

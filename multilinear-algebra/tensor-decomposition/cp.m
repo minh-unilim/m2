@@ -4,10 +4,12 @@ function [lambda, factors] = cp(X, epsilon, max_iter)
     arguments
         X;                % The tensor
         epsilon = 1e-10;   % Convergence tolerance
-        max_iter = 5000;  % Maximum number of iterations
+        max_iter = 5;  % Maximum number of iterations
     end
     
     dims = size(X);
+
+    fprintf("CP decomposition...\n");
     fprintf("Tensor of dimensions: ");
     disp(dims);
 
@@ -19,10 +21,10 @@ function [lambda, factors] = cp(X, epsilon, max_iter)
 
     max_rank = min(mutual_products(:));
 
-    fprintf("Max possible rank: %d", max_rank)
+    fprintf("Max possible rank: %d \n", max_rank)
 
     for r=1:max_rank
-        [lambda, factors, converged] = cp_asl(X, r);
+        [lambda, factors, converged] = cp_asl(X, r, epsilon, max_iter);
         if converged == 1
             break
         end

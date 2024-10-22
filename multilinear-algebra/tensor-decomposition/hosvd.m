@@ -18,6 +18,8 @@ function [core, factors] = hosvd(X, ranks)
         end
     end
 
+    disp(ranks)
+
     factors = cell(1, nmodes);
     max_ranks = multilinear_rank(X);
 

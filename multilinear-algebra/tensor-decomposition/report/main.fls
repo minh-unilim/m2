@@ -311,6 +311,17 @@ INPUT ./contents/report.tex
 INPUT contents/report.tex
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT ./img/dependency.png
+INPUT ./img/dependency.png
+INPUT ./img/dependency.png
+INPUT ./img/dependency.png
+INPUT ./img/dependency.png
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT ./img/testcases.png
+INPUT ./img/testcases.png
+INPUT ./img/testcases.png
+INPUT ./img/testcases.png
+INPUT ./img/testcases.png
 INPUT main.aux
 INPUT ./contents/report.aux
 INPUT ./contents/report.aux
@@ -331,4 +342,5 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

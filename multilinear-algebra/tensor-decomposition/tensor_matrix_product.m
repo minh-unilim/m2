@@ -1,10 +1,25 @@
-function Y = tensor_matrix_product(X, A, n)
+function Y = tensor_matrix_product(X, A, n, nmodes)
     % X: input tensor
     % A: matrix for mode-n multiplication
     % n: mode along which to multiply (1-indexed)
 
+    arguments
+        X;
+        A;
+        n;
+        nmodes = length(size(X));
+    end
+
     % Get the dimensions of X
     dims = size(X);
+
+    if nmodes < n
+        fprintf("Dimension of X:")
+        disp(dims)
+        disp(X)
+        error("Applying %d-mode multiplication for %d-way tensor", ...
+            n, nmodes)
+    end
     
     % Permute the tensor to bring the n-th mode to the front
     order = [n, 1:n-1, n+1:length(dims)];

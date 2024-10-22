@@ -36,12 +36,9 @@ function [lambda, factors, converged] = cp_asl(X, r, epsilon, max_iter)
             current_factors = factors([1:mode-1, mode+1:n]);
             reversed_factors = flip(current_factors);
             
-            % V = A_1^TA_1 * ... * A_{mode-1}^TA_{mode-1} *
-            % A_{mode+1}^TA_{mode-1}^T * ... A_{N}^TA_{N}
             gramians = cellfun(@(mat) mat' * mat, current_factors, 'UniformOutput', false);
             V = hadamard(gramians{:});
 
-            % disp(reversed_factors)
             factors{mode} = matricization(X, mode)*katri_rao(reversed_factors{:})/V;
 
             % Normalize the factor matrix and adjust lambda
@@ -50,7 +47,7 @@ function [lambda, factors, converged] = cp_asl(X, r, epsilon, max_iter)
         end
 
         % Check for convergence
-        diff = tensor_difference(X, tensor_from_cp(lambda, factors{:}));
+        diff = sum((X - tensor_from_cp(lambda, factors{:})).^2, 'all');
         % fprintf('Iteration %d: Norm of difference = %e\n', iter, diff);
 
         if diff < epsilon
@@ -60,9 +57,10 @@ function [lambda, factors, converged] = cp_asl(X, r, epsilon, max_iter)
     end
     
     if iter == max_iter
-        fprintf('Reached maximum %d iterations without convergence.\n', max_iter);
+        fprintf('Reached maximum %d iterations.\n', max_iter);
         converged = 0;
     end
+
 
     fprintf('Final error %e.\n', diff);
     fprintf("------------------------------------------------------------------\n")
