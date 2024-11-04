@@ -77,7 +77,7 @@ classdef Tensor
         end
     end
 
-    function [lambda, factors, converged] = cp_asl(self, r, epsilon, max_iter)
+    function [lambda, factors, errors] = cp_asl(self, r, epsilon, max_iter)
         % CP_ASL Computes a rank-r CP approximation of a tensor X.
         % Output:
         % - lambda: normalizing vector
@@ -90,17 +90,18 @@ classdef Tensor
             epsilon = 1e-10;   % Convergence tolerance
             max_iter = 5000;  % Maximum number of iterations
         end
-
-        converged = 1;
     
         % Initialize lambda and factor matrices
         lambda = ones(r, 1);
         factors = cell(1, self.nmodes); % Cell array to store factor matrices
-    
+        errors = zeros(1, max_iter);
+        converged = 0;
+
         % Randomly initialize the factor matrices
         for n = 1:self.nmodes
             factors{n} = rand(self.dims(n), r);
         end
+
     
         fprintf('Approximating by rank-%d tensor...\n', r);
     
@@ -126,15 +127,17 @@ classdef Tensor
             diff_tensor = self - reconstructed_tensor;
             error = diff_tensor.norm_squared();
 
-            if error < epsilon
+            if error < epsilon && converged == 0
                 fprintf('Converged after %d iterations.\n', iter);
+                converged = 1;
                 break;
             end
+
+            errors(iter) = error;
         end
 
         if iter == max_iter
             fprintf('Reached maximum %d iterations.\n', max_iter);
-            converged = 0;
         end
     
     
@@ -151,7 +154,7 @@ classdef Tensor
             epsilon = 1e-10;   % Convergence tolerance
             max_iter = 5000;  % Maximum number of iterations
         end
-            
+    
         fprintf("CP decomposition...\n");
         fprintf("Tensor of dimensions: ");
         disp(self.dims);
@@ -164,16 +167,23 @@ classdef Tensor
     
         max_rank = min(mutual_products(:));
     
-        fprintf("Max possible rank: %d \n", max_rank)
+        fprintf("Max possible rank: %d \n", max_rank);
     
-        for r=1:max_rank
-            [lambda, factors, converged] = cp_asl(self, r, epsilon, max_iter);
-            if converged == 1
-                break
+        % Initialize a cell array to store the errors for each rank
+        all_errors = cell(max_rank, 1);
+    
+        % Loop over ranks
+        for r = 1:max_rank
+            [lambda, factors, errors] = cp_asl(self, r, epsilon, max_iter);
+            all_errors{r} = errors;  % Store the errors for this rank
+            if errors(length(errors)) < epsilon
+                break;
             end
         end
-    end
     
+        plot_errors(all_errors)
+    end
+
     function [core, factors] = hosvd(self, ranks)
         % HOSVD Computes higher-order SVD of a tensor X, with respect to
         % multilinear ranks
@@ -252,12 +262,6 @@ classdef Tensor
                 core = core.times(factors{inner_mode}', inner_mode);
             end
     
-            % X_approx = core;
-            % 
-            % for inner_mode = 1:self.nmodes
-            %     X_approx = tensor_matrix_product(X_approx, factors{inner_mode}, inner_mode);
-            % end  
-
             approx_self = TensorBuilder.from_tucker(core, factors{:});
     
             error = norm_squared(self - approx_self);

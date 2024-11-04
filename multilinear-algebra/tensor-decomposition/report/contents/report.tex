@@ -122,7 +122,106 @@ Implementation is organized into three main classes: Tensor, Tensor Builder and 
     \label{fig:dependencies}
 \end{figure}
 
-Testcases can be found in \texttt{testcase\_generator.m}, including analytically solvable $2\times2\times2$ tensors to check validity and convergence. Random tensors are also used to check convergence.
+Testcases can be found in \texttt{testcase\_generator.m}, including analytically solvable tensors to check validity and convergence. Random tensors are also used to check convergence. Some $2\times2\times2$ tensors are shown in Table \ref{table:222}
+
+\begin{table}[ht]
+    \centering % Center the table
+    \begin{tabular}{|c|p{6cm}|c|c|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{NO}}                                                                                                                                                                                                                & \multicolumn{1}{c|}{\textbf{Tensor}} & \multicolumn{1}{c|}{\textbf{Analytic rank}} & \multicolumn{1}{c|}{\textbf{Numerical rank}} \\
+        \hline
+        1                                                                                                                                                                                                                                                &
+        \parbox[c]{4cm}{ % Adjust width as needed
+            \centering % Center the contents
+            \vspace{0.5cm} % Space above the tensor
+            $\left(
+                \begin{array}{cc|cc}
+                        1 & 2 & 3 & 6 \\
+                        4 & 5 & 6 & 9
+                    \end{array}
+                \right)$
+            \vspace{0.5cm} % Space below the tensor
+        }                                                                                                                                                                                                                                                & 1                                    & 1                                                                                          \\
+        \hline
+        2                                                                                                                                                                                                                                                &
+        \parbox[c]{4cm}{ % Adjust width as needed
+            \centering % Center the contents
+            \vspace{0.5cm} % Space above the tensor
+            $\left(
+                \begin{array}{cc|cc}
+                        0 & 2 & 2 & 0 \\
+                        0 & 2 & 2 & 0
+                    \end{array}
+                \right)$
+            \vspace{0.5cm} % Space below the tensor
+        }                                                                                                                                                                                                                                                & 2                                    & 3                                                                                          \\
+        \hline
+        3                                                                                                                                                                                                                                                &
+        \parbox[c]{4cm}{ % Adjust width as needed
+            \centering % Center the contents
+            \vspace{0.5cm} % Space above the tensor
+            $\left(
+                \begin{array}{cc|cc}
+                        1 & 0 & 0  & 1 \\
+                        0 & 1 & -1 & 0
+                    \end{array}
+                \right)$
+            \vspace{0.5cm} % Space below the tensor
+        }                                                                                                                                                                                                                                                & 3                                    & 3                                                                                          \\
+        \hline
+        4                                                                                                                                                                                                                                                &
+        \parbox[c]{4cm}{ % Adjust width as needed
+            \centering % Center the contents
+            \vspace{0.5cm} % Space above the tensor
+            $\left(
+                \begin{array}{cc|cc}
+                        -1 & 0 & 0 & 1 \\
+                        0  & 1 & 1 & 0
+                    \end{array}
+                \right)$
+            \vspace{0.5cm} % Space below the tensor
+        }                                                                                                                                                                                                                                                & 3                                    & 3                                                                                          \\
+        \hline
+        5                                                                                                                                                                                                                                                &
+        \parbox[c]{4cm}{ % Adjust width as needed
+            \centering % Center the contents
+            \vspace{0.5cm} % Space above the tensor
+            $\left(
+                \begin{array}{cc|cc}
+                        1 & 3 & 5 & 7 \\
+                        2 & 4 & 6 & 8
+                    \end{array}
+                \right)$
+            \vspace{0.5cm} % Space below the tensor
+        }                                                                                                                                                                                                                                                & unsolved                             & 3                                                                                          \\
+        \hline
+        6                                                                                                                                                                                                                                                &
+        $\mathbf{u}\otimes \mathbf{u}\otimes \mathbf{v} + \mathbf{u}\otimes \mathbf{v}\otimes \mathbf{u} + \mathbf{v}\otimes \mathbf{u}\otimes \mathbf{u}$, where $\|\mathbf{u}\| = \|\mathbf{v}\| = 1$ and $\langle \mathbf{u}, \mathbf{v}\rangle < 1$. & 3                                    & 2, 3                                                                                       \\
+        \hline
+    \end{tabular}
+    \caption{Some $2\times 2\times 2$ tensor decomposition results.}
+    \label{table:222}
+\end{table}
+
+The last case in Table \ref{table:222} is a W-state \cite{cabello2002bell}, where the given rank-$3$ tensor can be approximated arbitrarily well by rank-$2$ tensors. Indeed, consider the following sequence of rank-$2$ tensors
+
+\begin{align*}
+    \A_n
+     & = n\left(\mathbf{u} + \dfrac{1}{n}\mathbf{v}\right)\otimes\left(\mathbf{u} + \dfrac{1}{n}\mathbf{v}\right)\left(\mathbf{u} + \dfrac{1}{n}\mathbf{v}\right) - n \mathbf{u}\otimes\mathbf{u}\otimes\mathbf{u} \\
+     & = \A + \dfrac{1}{n}(\mathbf{u}\otimes \mathbf{v}\otimes \mathbf{v} + \mathbf{v}\otimes \mathbf{u}\otimes \mathbf{v} + \mathbf{v}\otimes \mathbf{v}\otimes \mathbf{u})                                       \\
+     & \xrightarrow{n\to\infty} \A.
+\end{align*}
+
+The result for such border rank is illustrated in Figure \ref{fig:wstate}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/wstate.png}
+    \caption{W-state approximation}
+    \label{fig:wstate}
+\end{figure}
+
+
 
 \begin{figure}
     \centering

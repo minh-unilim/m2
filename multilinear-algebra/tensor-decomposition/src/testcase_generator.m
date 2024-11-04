@@ -14,6 +14,8 @@ testcases{6} = Tensor(1:27, [3 3 3]);
 for i = 1:length(testcases)
     fprintf("----------- TESTCASE %d ---------------------\n", i)
     cp_res = testcases{i}.cp();
+
+    fprintf("HOSVD...\n")
     hosvd_res = testcases{i}.hosvd();
 
     max_ranks = testcases{i}.multilinear_ranks;
@@ -23,6 +25,8 @@ for i = 1:length(testcases)
             ranks(idx) = ranks(idx) - 1;
         end
     end
+
+    fprintf("HOOI with ranks...\n")
 
     hooi_res = testcases{i}.hooi(ranks);
 end
