@@ -8,7 +8,7 @@ Problems with industrial optimization
 Examples: Audience forecast (TF1), Telecom user behavior, Failure prediction.
 Comparing with academics optimization: linear regression, SVM, etc.
 
-Operation research:
+Operations research:
 1. Minimize the cost of optimization process along with near-optimal solution
    
    a. Network design

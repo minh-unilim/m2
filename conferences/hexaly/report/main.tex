@@ -18,6 +18,7 @@
 \usepackage{bm}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{hyperref}
 
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -51,19 +52,6 @@
 \newcounter{exo}
 \newcounter{parti}
 
-\def\exercice%
-{\stepcounter{exo}\noindent{\bf Exercise \arabic{parti}.\arabic{exo}.} \ }%
-{\vspace{0,3cm}}
-
-\def\partie%
-{\stepcounter{parti} \noindent {\bf \arabic{parti}.} --- }%
-{\vspace{0,3cm}}
-
-\def\exercices%
-{\noindent{\bf Exercises.} \ }%
-{\vspace{0,3cm}}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -95,7 +83,6 @@
 
 \pagestyle{empty}
 
-\setlength{\parindent}{0em}
 \renewcommand{\labelitemi}{\scriptsize$\blacksquare$}
 \makeatletter
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
@@ -113,34 +100,12 @@
 \begin{center}
 
   \textsc{Facult\'e des Sciences et Techniques}  \hfill \textsc{Universit\'e de Limoges} \\
-  Applied Multilinear Algebra \hfill M2 -- Semester 1 -- 2024/2025 \\
+  \hfill M2 -- Semester 1 -- 2024/2025 \\
   \bigskip
 
-  %%TITRE
-  {\bf
-    \vspace{0.9cm}
-    % Exercise sheet n$^\circ$ 4\\
-    \vspace{0.2cm}
-    CHAU Dang Minh
-  }
-\end{center}
-\bigskip
-
-\vspace{7cm}
-
-\renewcommand{\arraystretch}{2}
-\begin{center}
-  \begin{tabular}{c}
-    \hline
-    {\textbf{{\Large  TENSOR DECOMPOSITIONS}}}     \\
-    {\textbf{{\Large  THEORY AND IMPLEMENTATION}}} \\
-    \hline
-  \end{tabular}
 \end{center}
 
-\vspace{0.5cm}
-\pagestyle{plain}
-\include{contents/report}
-\printbibliography
+
+\input{contents/report}
 
 \end{document}
