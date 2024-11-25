@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 1731265437.84102 "main.bcf" "main.bbl" "main" 1731265593.58315 0
-  "main.bcf" 1731265592 108081 ef9255d88e5b92738414083911d73428 "pdflatex"
+["biber main"] 1731265437.84102 "main.bcf" "main.bbl" "main" 1731357952.77492 0
+  "main.bcf" 1731357952 108081 ef9255d88e5b92738414083911d73428 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1731265589.83899 "i:/My Drive/ACSYON/M2/multilinear-algebra/jennrich-algorithm/report/main.tex" "main.pdf" "main" 1731265593.62431 0
+["pdflatex"] 1731357951.14176 "d:/M2/multilinear-algebra/jennrich-algorithm/report/main.tex" "main.pdf" "main" 1731357952.77579 0
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1715005736 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1715000933 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1715000933 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -35,6 +35,7 @@
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1715002609 1124 6c73e740cf17375f03eec0ee63599741 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1715002609 1116 933a60c408fc0a863a92debe84b2d294 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1715002609 1120 8b7d695260f3cff42e636090a8002094 ""
+  "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1715002609 768 1321e9409b4137d6fb428ac9dc956269 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm" 1715013124 688 37338d6ab346c2f1466b29e195316aa4 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm" 1715013124 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1715000933 34811 78b52f49e893bcba91bd7581cdc144c0 ""
@@ -48,6 +49,7 @@
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1715000933 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1715000933 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1715000933 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
+  "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb" 1715000933 31099 342ef5a582aacbd3346f3cf4579679fa ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1715000933 34694 870c211f62cb72718a00e353f14f254d ""
   "c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1715010466 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "c:/texlive/2024/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1715001230 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -201,13 +203,15 @@
   "c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1715016025 5529302 90924f286bd62ce7380ad2a7c245cc29 ""
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1715016381 8225106 23b0b124de1b4418613bd745731e6982 ""
   "c:/texlive/2024/texmf.cnf" 1715015993 713 e69b156964470283e0530f5060668171 ""
-  "contents/report.tex" 1731265589 2662 8d8342291d15a4df12516c72fe08f4f5 ""
-  "i:/My Drive/ACSYON/M2/multilinear-algebra/jennrich-algorithm/report/main.tex" 1731232203 2327 81bdcd82d3d47596ef1519daab4cd52d ""
+  "contents/report.tex" 1731357948 3760 7ebd0ad17b6617f1bc417a8d4c8f4df9 ""
+  "d:/M2/multilinear-algebra/jennrich-algorithm/report/main.tex" 1731232203 2327 81bdcd82d3d47596ef1519daab4cd52d ""
+  "img/jennrich.png" 1731355258 77216 a2053d77408f5d3b47b742dd1075a066 ""
+  "img/tests.png" 1731357902 41382 f9b91bc7f22221c8bacb54c0812cf668 ""
   "macros.sty" 1729511031 2568 f90d512a7c9c692f0bb3fb0bbea5ba8c ""
-  "main.aux" 1731265592 395 a39759afd16caec4b57ba14b15b0d706 "pdflatex"
+  "main.aux" 1731357952 901 1689c1f2e796a8ec8086dd96ec0d1573 "pdflatex"
   "main.bbl" 1731265439 486 76d65a242ec496c9b4361af646ff12cb "biber main"
-  "main.out" 1731265592 146 2c04cb4839f8675ec0ce23897bc58026 "pdflatex"
-  "main.run.xml" 1731265593 2299 33d8dfeb54dc04cad67f98afaa10639d "pdflatex"
+  "main.out" 1731357952 259 a18e2dc5457fc725f58c2d0e8ad572a2 "pdflatex"
+  "main.run.xml" 1731357952 2299 33d8dfeb54dc04cad67f98afaa10639d "pdflatex"
   "main.tex" 1731232203 2327 81bdcd82d3d47596ef1519daab4cd52d ""
   (generated)
   "main.aux"

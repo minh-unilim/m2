@@ -27,26 +27,22 @@ classdef Tensor
 
     % Overload common operators
     function Z = minus(A, B)
+
         if A.dims ~= B.dims
             error("Two tensors must have the same dimensions")
         end
         Z = Tensor(A.entries - B.entries, A.dims);
     end
-    
-    function Y = subsref(self, S)
-
-        if S.type == '()'
-            fprintf("Bracket index");
-        else
-            Error("Unsupported indexing");
-        end
-        Y = 1;
-    end
 
     function ns = norm_squared(self)
         ns = sum(self.entries.^2);
     end
-    
+
+    function A = frontal_slice(self, n)
+        tensor = reshape(self.entries, self.dims);
+        A = tensor(:, :, n);
+    end
+
     function A = to_matrix(self, n)
         % Matricizes the tensor in mode n
         n_dim = self.dims(n);
@@ -105,7 +101,6 @@ classdef Tensor
         lambda = ones(r, 1);
         factors = cell(1, self.nmodes); % Cell array to store factor matrices
         errors = zeros(1, max_iter);
-        converged = 0;
 
         % Randomly initialize the factor matrices
         for n = 1:self.nmodes
@@ -133,16 +128,14 @@ classdef Tensor
             end
     
             % Check for convergence
-            reconstructed_tensor = TensorBuilder.from_cp(lambda, factors{:});
+            reconstructed_tensor = TensorBuilder.from_cp(lambda, factors);
             diff_tensor = self - reconstructed_tensor;
             error = diff_tensor.norm_squared();
 
-            if error < epsilon && converged == 0
+            if error < epsilon
                 fprintf('Converged after %d iterations.\n', iter);
-                converged = 1;
                 break;
             end
-
             errors(iter) = error;
         end
 
@@ -191,106 +184,7 @@ classdef Tensor
             end
         end
     
-        plot_errors(all_errors)
     end
-
-    function [core, factors] = hosvd(self, ranks)
-        % HOSVD Computes higher-order SVD of a tensor X, with respect to
-        % multilinear ranks
-    
-        arguments
-            self;
-            ranks = multilinear_ranks(self);
-        end
-       
-        if nargin == 1
-            fprintf("Multilinear ranks not specified, computing max ones...\n")
-        else
-            if length(ranks) ~= self.nmodes
-                error("Expected %d ranks, got %d\n", ...
-                    self.nmodes, length(ranks))
-            end
-        end
-    
-        disp(ranks)
-    
-        factors = cell(1, self.nmodes);
-        max_ranks = self.multilinear_ranks();
-    
-        for mode = 1:self.nmodes
-            if ranks(mode) > max_ranks(mode)
-                error("Mode %d has max rank %d, got %d", mode, max_ranks(mode), ranks(mode))   
-            end
-            [U, ~, ~] = svd(self.to_matrix(mode));
-            factors{mode} = U(:, 1:ranks(mode));
-        end
-    
-        core = self;
-    
-        for mode=1:self.nmodes
-            core = core.times(factors{mode}', mode);
-        end
-        
-    end
-    
-    function [core, factors] = hooi(self, ranks, max_iter, tol)
-        arguments
-            self;
-            ranks = multilinear_ranks(self);
-            max_iter = 5000;
-            tol = 1e-10;
-        end
-        [core, factors] = self.hosvd(ranks);
-    
-        if nargin == 1
-            fprintf("Multilinear ranks not specified, computing HOSVD...\n")
-            [core, factors] = hosvd(X, ranks);
-            return
-        end
-    
-        for iter = 1:max_iter
-            for mode = 1:self.nmodes 
-                % Calculate mode product for other modes
-                for inner_mode = 1:self.nmodes
-                    
-                    Y = self;
-                    if inner_mode == mode
-                        continue
-                    end
-    
-                    Y = Y.times(factors{inner_mode}', inner_mode);
-                end
-    
-                Ymode = Y.to_matrix(mode);
-                [U, ~, ~] = svd(Ymode);
-                factors{mode} = U(:, 1:ranks(mode));
-            end
-            
-            core = self;
-    
-            for inner_mode = 1:self.nmodes
-                core = core.times(factors{inner_mode}', inner_mode);
-            end
-    
-            approx_self = TensorBuilder.from_tucker(core, factors{:});
-    
-            error = norm_squared(self - approx_self);
-    
-            if error < tol
-                fprintf("Converged after %d iterations.\n", iter)
-                break
-            end
-        end
-    
-    
-        if (iter == max_iter)
-            fprintf("Maximum %d iterations reached without convergence.\n", iter)
-        end
-    
-        fprintf("Final error %e.\n", error)
-        
-    end
-
     end
    
 end

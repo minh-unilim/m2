@@ -36,6 +36,11 @@ classdef Tensor
     function ns = norm_squared(self)
         ns = sum(self.entries.^2);
     end
+
+    function A = frontal_slice(self, n)
+        tensor = reshape(self.entries, self.dims);
+        A = tensor(:, :, n);
+    end
     
     function A = to_matrix(self, n)
         % Matricizes the tensor in mode n

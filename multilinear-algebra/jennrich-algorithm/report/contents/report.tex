@@ -47,3 +47,20 @@ which means that the columns of $\mathbf{B}$ are eigenvectors of $\mathbf{M}_x^\
 \begin{equation}
     \X_{(3)} = \mathbf{C}(\mathbf{B}\odot \mathbf{A})^\top.
 \end{equation}
+
+\section{Implementation}
+Function and class dependencies are given in Figure \ref{fig:jennrich}. We use Alternative Least Square CP to compare the results. Furthermore, the decomposed factors are standardized to unit-normed columns when compose back to a tensor to compare with the original one. If the difference between the original and the reconstructed tensors is less than a tolerance, the algorithm ran successfully. If the rank determined by Jennrich's algorithm is smaller than that by CP and the difference is larger than the tolerance after two run times, Jennrich's algorithm is concluded to be unable to solve such case. Detailed testcases are given in \texttt{testcase\_generator.m}. A sample of testing process is illustrated in Figure \ref{fig:tests}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/jennrich.png}
+    \caption{Jennrich's Algorithm Implementation}
+    \label{fig:jennrich}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/tests.png}
+    \caption{Testing}
+    \label{fig:tests}
+\end{figure}
