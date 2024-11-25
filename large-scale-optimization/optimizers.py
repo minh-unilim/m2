@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from typing import Literal
+from LineSearch import line_search
+from copy import deepcopy
 
 class Optimizer:
   def __init__(self, dist):
@@ -12,13 +15,14 @@ class Optimizer:
 
 class GradientDescent(Optimizer):
   def __init__(self, 
-               input_size:tuple,
+               input_size:int,
                f, 
+               x0 = None,
                grad_f=None, 
                dist=1e-5,
-               lr=0.01, 
+               lr:float|Literal['wolfe']=0.01, 
                tol=1e-6,
-               max_iter=1000):
+               max_iter=int(1e6)):
     """
       f: objective function
       grad_f: gradient of the objective function. If not provided, it will be computed centrally with distance dist
@@ -29,18 +33,24 @@ class GradientDescent(Optimizer):
 
     self.input_size = input_size
     self.f = f
+    self.x0 = x0 if x0 is not None else np.random.rand(self.input_size)
     self.grad_f = grad_f if grad_f is not None else lambda x: self.numerical_gradient(f, x)
-    self.lr = lr
+    self.init_lr = lr
     self.tol = tol
     self.max_iter = max_iter
-
-  def run(self, plot=False):
-      x = np.random.rand(*self.input_size)  # Correct unpacking with *
+  
+  def run(self):
+      x = self.x0  
       history = [x]
       for i in range(self.max_iter):
           grad = self.grad_f(x)
-          x -= self.lr * grad
-          history.append(x)
+
+          lr = line_search(f=self.f, 
+                           x=x, 
+                           direction=-grad, 
+                           grad_f=self.grad_f) if self.init_lr == 'wolfe' else self.init_lr
+          x -= lr * grad
+          history.append(deepcopy(x))
 
           if np.linalg.norm(grad) < self.tol:
               print(f"GD converged after {i} iterations.")
@@ -48,10 +58,10 @@ class GradientDescent(Optimizer):
           if i == self.max_iter - 1:
               print(f"GD reached max iterations.")
 
-      if plot:
-          plt.plot([self.f(x) for x in history])
-          plt.xlabel('Iteration')
-          plt.ylabel('$f(x)$')
-          plt.show()
+      # if plot:
+      #     plt.plot([self.f(x) for x in history])
+      #     plt.xlabel('Iteration')
+      #     plt.ylabel('$f(x)$')
+      #     plt.show()
 
       return x, history
