@@ -1,7 +1,7 @@
 INFO:  ANSI Code Page: 1252
 INFO:  latexindent.exe version 3.24, 2024-04-28, a script to indent .tex files
        latexindent.exe lives here: C:/texlive/2024/bin/windows/
-       Sun Nov 17 21:11:46 2024
+       Mon Nov 25 23:43:27 2024
        Filename: d:/M2/conferences/inria/report/contents/__latexindent_temp_report.tex
 INFO:  Processing switches:
        -y|--yaml: YAML settings specified via command line
